@@ -1,16 +1,18 @@
 from flask import Flask, render_template
+from data import db_session
+
 
 app = Flask(__name__)
 
 
 @app.route('/')
 def main():
-    return render_template('main.html')
+    return render_template('base.html')
 
 
 @app.route('/soups')
 def soups():
-    return 'soups'
+    return 'Soups'
 
 
 @app.route('/drinks')
@@ -34,4 +36,5 @@ def second_dish():
 
 
 if __name__ == '__main__':
+    db_session.global_init("db/users.db")
     app.run(port=8080, host='127.0.0.1')
