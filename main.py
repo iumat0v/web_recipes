@@ -36,5 +36,5 @@ def second_dish():
 
 
 if __name__ == '__main__':
-    db_session.global_init("db/users.db")
+    db_session.global_init("db/rec.db")
     app.run(port=8080, host='127.0.0.1')
