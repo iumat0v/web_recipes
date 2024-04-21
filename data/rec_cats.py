@@ -2,7 +2,7 @@ import sqlalchemy
 from .db_session import SqlAlchemyBase
 
 
-class User(SqlAlchemyBase):
+class RecCat(SqlAlchemyBase):
     __tablename__ = 'rec_cats'
 
     id = sqlalchemy.Column(sqlalchemy.Integer,

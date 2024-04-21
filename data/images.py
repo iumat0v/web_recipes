@@ -2,7 +2,7 @@ import sqlalchemy
 from .db_session import SqlAlchemyBase
 
 
-class User(SqlAlchemyBase):
+class Image(SqlAlchemyBase):
     __tablename__ = 'images'
 
     id = sqlalchemy.Column(sqlalchemy.Integer,

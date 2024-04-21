@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% for s in soups %}
+        <p>{{s.id}} <a href="/soup/1">{{s.name}}</a></p>
+    {% endfor %}
+{% endblock %}
