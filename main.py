@@ -1,13 +1,17 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect
+from flask_login import LoginManager
+
 from data import db_session
 from data.recipes import Recipe
 from data.cats import Cat
 from data.rec_cats import RecCat
 from data.images import Image
 from data.rec_images import RecImage
-
+from data.users import User
+from forms.user import RegisterForm
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 login_manager = LoginManager()
 login_manager.init_app(app)
 
