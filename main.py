@@ -18,16 +18,14 @@ def main():
 @app.route('/soups')
 def soups():
     db_sess = db_session.create_session()
-    temp = [el.id for el in db_sess.query(RecCat).filter(RecCat.id_cats == 1).all()]
+    temp = [el.id for el in db_sess.query(RecCat).filter(RecCat.id_cats==1).all()]
     soups = db_sess.query(Recipe).filter(Recipe.id.in_(temp)).all()
     return render_template('list_soups.html', soups=soups)
-
 
 @app.route('/soup/<int:pk>')
 def soup(pk):
     db_sess = db_session.create_session()
     img = db_sess.query(Image).filter(Image.id==db_sess.query(RecImage).filter(RecImage.id_rec==pk).first().id_images).first()
-    print(img.file)
     soup = db_sess.query(Recipe).filter(Recipe.id==pk).first()
     return render_template('detail_soup.html', soup=soup, img=img.file)
 
