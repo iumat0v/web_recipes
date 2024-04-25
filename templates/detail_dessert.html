@@ -1,10 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-    <p>{{dessert.name}}</p>
-    <p>{{dessert.ingredients}}</p>
+<div style="text-align: center; font-size: 20px;">
+    <h2>{{dessert.name}}</h2>
+    <div style="display:flex">
+        <p>Список ингредиентов:</p>
+        <p style="width:400px">{{dessert.ingredients}}</p>
+    </div>
     <p>{{dessert.recipe}}</p>
-<a href="/desserts">Вернуться к списку десертов</a>
+    <img src="{{ url_for('static', filename=img) }}" alt="{{dessert.name}}">
+</div>
+
+    <a href="/desserts">Вернуться к списку десертов</a>
 
 {% endblock %}

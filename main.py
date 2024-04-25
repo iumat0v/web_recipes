@@ -29,6 +29,7 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
+
 @login_manager.user_loader
 def load_user(user_id):
     db_sess = db_session.create_session()
@@ -118,9 +119,10 @@ def logout():
 @app.route('/soups')
 def soups():
     db_sess = db_session.create_session()
-    temp = [el.id for el in db_sess.query(RecCat).filter(RecCat.id_cats==1).all()]
+    temp = [el.id for el in db_sess.query(RecCat).filter(RecCat.id_cats == 1).all()]
     soups = db_sess.query(Recipe).filter(Recipe.id.in_(temp)).all()
     return render_template('list_soups.html', soups=soups)
+
 
 @app.route('/soup/<int:pk>')
 def soup(pk):
