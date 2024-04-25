@@ -53,6 +53,7 @@ def reqister():
         return redirect('/login')
     return render_template('register.html', title='Регистрация', form=form)
 
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -85,8 +86,9 @@ def soups():
 @app.route('/soup/<int:pk>')
 def soup(pk):
     db_sess = db_session.create_session()
-    img = db_sess.query(Image).filter(Image.id==db_sess.query(RecImage).filter(RecImage.id_rec==pk).first().id_images).first()
-    soup = db_sess.query(Recipe).filter(Recipe.id==pk).first()
+    img = db_sess.query(Image).filter(
+        Image.id == db_sess.query(RecImage).filter(RecImage.id_rec == pk).first().id_images).first()
+    soup = db_sess.query(Recipe).filter(Recipe.id == pk).first()
     return render_template('detail_soup.html', soup=soup, img=img.file)
 
 
@@ -101,8 +103,10 @@ def drinks():
 @app.route('/drink/<int:pk>')
 def drink(pk):
     db_sess = db_session.create_session()
+    img = db_sess.query(Image).filter(
+        Image.id == db_sess.query(RecImage).filter(RecImage.id_rec == pk).first().id_images).first()
     drink = db_sess.query(Recipe).filter(Recipe.id==pk).first()
-    return render_template('detail_drink.html', drink=drink)
+    return render_template('detail_drink.html', drink=drink, img=img.file)
 
 
 @app.route('/desserts')
@@ -116,8 +120,10 @@ def desserts():
 @app.route('/dessert/<int:pk>')
 def dessert(pk):
     db_sess = db_session.create_session()
-    dessert = db_sess.query(Recipe).filter(Recipe.id==pk).first()
-    return render_template('detail_dessert.html', dessert=dessert)
+    img = db_sess.query(Image).filter(
+        Image.id == db_sess.query(RecImage).filter(RecImage.id_rec == pk).first().id_images).first()
+    dessert = db_sess.query(Recipe).filter(Recipe.id == pk).first()
+    return render_template('detail_dessert.html', dessert=dessert, img=img.file)
 
 
 @app.route('/salads')
@@ -131,8 +137,10 @@ def salads():
 @app.route('/salad/<int:pk>')
 def salad(pk):
     db_sess = db_session.create_session()
-    salad = db_sess.query(Recipe).filter(Recipe.id==pk).first()
-    return render_template('detail_salad.html', salad=salad)
+    img = db_sess.query(Image).filter(
+        Image.id == db_sess.query(RecImage).filter(RecImage.id_rec == pk).first().id_images).first()
+    salad = db_sess.query(Recipe).filter(Recipe.id == pk).first()
+    return render_template('detail_salad.html', salad=salad, img=img.file)
 
 
 @app.route('/second_dishes')
@@ -146,8 +154,10 @@ def second_dishes():
 @app.route('/second_dish/<int:pk>')
 def second_dish(pk):
     db_sess = db_session.create_session()
-    second_dish = db_sess.query(Recipe).filter(Recipe.id==pk).first()
-    return render_template('detail_second_dish.html', second_dish=second_dish)
+    img = db_sess.query(Image).filter(
+        Image.id == db_sess.query(RecImage).filter(RecImage.id_rec == pk).first().id_images).first()
+    second_dish = db_sess.query(Recipe).filter(Recipe.id == pk).first()
+    return render_template('detail_second_dish.html', second_dish=second_dish, img=img.file)
 
 
 if __name__ == '__main__':
