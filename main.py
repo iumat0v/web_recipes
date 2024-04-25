@@ -1,5 +1,8 @@
-from flask import Flask, render_template, redirect
+import os
+
+from flask import Flask, render_template, redirect, request
 from flask_login import LoginManager, login_user, logout_user, login_required
+from werkzeug.utils import secure_filename
 
 from data import db_session
 from data.recipes import Recipe
@@ -8,16 +11,23 @@ from data.rec_cats import RecCat
 from data.images import Image
 from data.rec_images import RecImage
 from data.users import User
-from forms.user import RegisterForm
+from forms.forms import RegisterForm
 from data.users import User
-from forms.user import RegisterForm, LoginForm
+from forms.forms import RegisterForm, LoginForm, AddBldForm
+
+UPLOAD_FOLDER = os.getcwd() + '\\static\\images'
+ALLOWED_EXTENSIONS = set(['png', 'jpg'])
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 login_manager = LoginManager()
 login_manager.init_app(app)
 
 
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -67,6 +77,35 @@ def login():
                                message="Неправильный логин или пароль",
                                form=form)
     return render_template('login.html', title='Авторизация', form=form)
+
+
+@app.route('/add_bld',  methods=['GET', 'POST'])
+@login_required
+def add_bld():
+    form = AddBldForm()
+    if request.method == 'POST':
+        db_sess = db_session.create_session()
+        rec = Recipe()
+        image = Image()
+        rec_cat = RecCat()
+        rec_image = RecImage()
+        rec.name = form.name.data
+        rec.ingredients = form.ingr.data
+        rec.recipe = form.rec.data
+        db_sess.add(rec)
+        db_sess.commit()
+
+        file = request.files['img']
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+        print(form.name.data, form.ingr.data, form.rec.data, filename)
+        image.file = '\\images\\' + filename
+        db_sess.add(image)
+        db_sess.commit()
+    return render_template('add_bld.html', form=form)
+
 
 
 @app.route('/logout')
