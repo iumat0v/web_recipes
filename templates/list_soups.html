@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {% for s in soups %}
-        <p>{{s.id}} <a href="{{ url_for('soup', pk=s.id) }}">{{s.name}}</a></p>
+    {% for soup in soups %}
+        <p>{{soup.id}} <a href="{{ url_for('soup', pk=soup.id) }}">{{soup.name}}</a></p>
     {% endfor %}
 {% endblock %}

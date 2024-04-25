@@ -2,6 +2,6 @@
 
 {% block content %}
     {% for dish in second_dishes %}
-        <p>{{dish.id}} <a href="/second_dish/4">{{dish.name}}</a></p>
+        <p>{{dish.id}} <a href="{{ url_for('second_dish', pk=dish.id) }}">{{dish.name}}</a></p>
     {% endfor %}
 {% endblock %}
