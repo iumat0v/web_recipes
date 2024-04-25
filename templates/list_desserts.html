@@ -2,6 +2,6 @@
 
 {% block content %}
     {% for des in desserts %}
-        <p>{{des.id}} <a href="/dessert/13">{{des.name}}</a></p>
+        <p>{{des.id}} <a href="{{ url_for('dessert', pk=des.id) }}">{{des.name}}</a></p>
     {% endfor %}
 {% endblock %}
