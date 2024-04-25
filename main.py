@@ -101,10 +101,20 @@ def add_bld():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-        print(form.name.data, form.ingr.data, form.rec.data, filename)
-        image.file = '\\images\\' + filename
+        image.file = 'images\\' + filename
         db_sess.add(image)
         db_sess.commit()
+        id_rec = db_sess.query(Recipe).filter(Recipe.name == form.name.data).first().id
+        id_cat = db_sess.query(Cat).filter(Cat.name == form.cat.data).first().id
+        id_img = db_sess.query(Image).filter(Image.file == ('images\\' + filename)).first().id
+        rec_cat.id_rec = id_rec
+        rec_cat.id_cats = id_cat
+        db_sess.add(rec_cat)
+        rec_image.id_rec = id_rec
+        rec_image.id_images = id_img
+        db_sess.add(rec_image)
+        db_sess.commit()
+        return redirect('/')
     return render_template('add_bld.html', form=form)
 
 
