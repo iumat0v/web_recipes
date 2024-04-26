@@ -2,6 +2,6 @@
 
 {% block content %}
     {% for soup in soups %}
-        <p>{{soup.id}} <a href="{{ url_for('soup', pk=soup.id) }}">{{soup.name}}</a></p>
+        <p>{{loop.index}} <a href="{{ url_for('soup', pk=soup.id) }}">{{soup.name}}</a></p>
     {% endfor %}
 {% endblock %}

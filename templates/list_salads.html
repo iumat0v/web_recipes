@@ -2,6 +2,6 @@
 
 {% block content %}
     {% for salad in salads %}
-        <p>{{salad.id}} <a href="{{ url_for('salad', pk=salad.id) }}">{{salad.name}}</a></p>
+        <p>{{loop.index}} <a href="{{ url_for('salad', pk=salad.id) }}">{{salad.name}}</a></p>
     {% endfor %}
 {% endblock %}

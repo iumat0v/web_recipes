@@ -2,6 +2,6 @@
 
 {% block content %}
     {% for drink in drinks %}
-        <p>{{drink.id}} <a href="{{ url_for('drink', pk=drink.id) }}">{{drink.name}}</a></p>
+        <p>{{loop.index}} <a href="{{ url_for('drink', pk=drink.id) }}">{{drink.name}}</a></p>
     {% endfor %}
 {% endblock %}
