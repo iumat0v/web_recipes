@@ -38,7 +38,7 @@ def load_user(user_id):
 
 @app.route('/')
 def main():
-    return render_template('base.html')
+    return render_template('base.html', title='Книга рецептов')
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -131,7 +131,7 @@ def soups():
     db_sess = db_session.create_session()
     temp = [el.id for el in db_sess.query(RecCat).filter(RecCat.id_cats == 1).all()]
     soups = db_sess.query(Recipe).filter(Recipe.id.in_(temp)).all()
-    return render_template('list_soups.html', soups=soups)
+    return render_template('list_soups.html', soups=soups, title='Супы')
 
 
 @app.route('/soup/<int:pk>')
@@ -148,7 +148,7 @@ def drinks():
     db_sess = db_session.create_session()
     temp = [el.id for el in db_sess.query(RecCat).filter(RecCat.id_cats == 3).all()]
     drinks = db_sess.query(Recipe).filter(Recipe.id.in_(temp)).all()
-    return render_template('list_drinks.html', drinks=drinks)
+    return render_template('list_drinks.html', drinks=drinks, title='Напитки')
 
 
 @app.route('/drink/<int:pk>')
@@ -165,7 +165,7 @@ def desserts():
     db_sess = db_session.create_session()
     temp = [el.id for el in db_sess.query(RecCat).filter(RecCat.id_cats == 4).all()]
     desserts = db_sess.query(Recipe).filter(Recipe.id.in_(temp)).all()
-    return render_template('list_desserts.html', desserts=desserts)
+    return render_template('list_desserts.html', desserts=desserts, title='Десерты')
 
 
 @app.route('/dessert/<int:pk>')
@@ -182,7 +182,7 @@ def salads():
     db_sess = db_session.create_session()
     temp = [el.id for el in db_sess.query(RecCat).filter(RecCat.id_cats == 5).all()]
     salads = db_sess.query(Recipe).filter(Recipe.id.in_(temp)).all()
-    return render_template('list_salads.html', salads=salads)
+    return render_template('list_salads.html', salads=salads, title='Салаты')
 
 
 @app.route('/salad/<int:pk>')
@@ -199,7 +199,8 @@ def second_dishes():
     db_sess = db_session.create_session()
     temp = [el.id for el in db_sess.query(RecCat).filter(RecCat.id_cats == 2).all()]
     second_dishes = db_sess.query(Recipe).filter(Recipe.id.in_(temp)).all()
-    return render_template('list_second_dishes.html', second_dishes=second_dishes)
+    return render_template(
+        'list_second_dishes.html', second_dishes=second_dishes, title='Вторые блюда')
 
 
 @app.route('/second_dish/<int:pk>')
