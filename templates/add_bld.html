@@ -15,12 +15,7 @@
     </p>
     <p>
         {{ form.cat.label }}<br>
-        {{ form.cat(class="form-control") }}<br>
-        {% for error in form.cat.errors %}
-            <p class="alert alert-danger" role="alert">
-                {{ error }}
-            </p>
-        {% endfor %}
+        {{ form.cat}}<br>
     </p>
     <p>
         {{form.ingr.label}}<br>
