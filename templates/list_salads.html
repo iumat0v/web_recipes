@@ -1,7 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div style="display: flex;">
     {% for salad in salads %}
-        <p>{{loop.index}} <a href="{{ url_for('salad', pk=salad.id) }}">{{salad.name}}</a></p>
+        <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title"><font color="cc9900"><b>{{salad.name}}</b></font></h5>
+                <p class="card-text">{{salad.ingredients}}</p>
+                <a href="{{ url_for('salad', pk=salad.id) }}" class="btn btn-primary">Посмотреть рецепт</a>
+              </div>
+        </div>
     {% endfor %}
+</div>
 {% endblock %}

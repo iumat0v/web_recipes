@@ -1,7 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div style="display: flex;">
     {% for soup in soups %}
-        <p>{{loop.index}} <a href="{{ url_for('soup', pk=soup.id) }}">{{soup.name}}</a></p>
+        <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title"><font color="990000"><b>{{soup.name}}</b></font></h5>
+                <p class="card-text">{{soup.ingredients}}</p>
+                <a href="{{ url_for('soup', pk=soup.id) }}" class="btn btn-primary">Посмотреть рецепт</a>
+              </div>
+        </div>
     {% endfor %}
+</div>
 {% endblock %}
