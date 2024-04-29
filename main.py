@@ -4,14 +4,14 @@ from flask import Flask, render_template, redirect, request
 from flask_login import LoginManager, login_user, logout_user, login_required
 from werkzeug.utils import secure_filename
 
-from data import db_session
+from flask_restful import reqparse, abort, Api, Resource
+
+from data import db_session, recipes_resources
 from data.recipes import Recipe
 from data.cats import Cat
 from data.rec_cats import RecCat
 from data.images import Image
 from data.rec_images import RecImage
-from data.users import User
-from forms.forms import RegisterForm
 from data.users import User
 from forms.forms import RegisterForm, LoginForm, AddBldForm
 
@@ -19,6 +19,7 @@ UPLOAD_FOLDER = os.getcwd() + '\\static\\images'
 ALLOWED_EXTENSIONS = set(['png', 'jpg'])
 
 app = Flask(__name__)
+api = Api(app)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 login_manager = LoginManager()
@@ -214,4 +215,8 @@ def second_dish(pk):
 
 if __name__ == '__main__':
     db_session.global_init("db/rec.db")
+    api.add_resource(recipes_resources.RecipeListResource, '/api/recipes')
+    api.add_resource(recipes_resources.RecipeResource, '/api/recipes/<int:recipe_id>')
+    api.add_resource(recipes_resources.RecipeListCategory, '/api/categoris/<int:category_id>')
+    api.add_resource(recipes_resources.ListCategory, '/api/categoris')
     app.run(port=8080, host='127.0.0.1')

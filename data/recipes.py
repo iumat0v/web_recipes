@@ -1,8 +1,9 @@
 import sqlalchemy
 from .db_session import SqlAlchemyBase
+from sqlalchemy_serializer import SerializerMixin
 
 
-class Recipe(SqlAlchemyBase):
+class Recipe(SqlAlchemyBase, SerializerMixin):
     __tablename__ = 'recipes'
 
     id = sqlalchemy.Column(sqlalchemy.Integer,
