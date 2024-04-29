@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div style="text-align: center; font-size: 20px;">
+<div style="text-align: center; font-size: 20px; margin-left: 20px;">
     <h2>{{dessert.name}}</h2>
     <div style="display:flex">
-        <p>Список ингредиентов:</p>
+        <p><b>Список ингредиентов:</b></p>
         <p style="width:400px">{{dessert.ingredients}}</p>
     </div>
     <p>{{dessert.recipe}}</p>
     <img src="{{ url_for('static', filename=img) }}" alt="{{dessert.name}}">
 </div>
 
-    <a href="/desserts">Вернуться к списку десертов</a>
+    <a href="/desserts" style="margin-left: 20px;"><b>Вернуться к списку десертов</b></a>
 
 {% endblock %}
